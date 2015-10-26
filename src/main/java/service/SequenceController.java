@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,7 +58,8 @@ public class SequenceController {
 		// Select top scoring training sequences
 		sequenceScores = MapUtilities.sortByValue(sequenceScores);
 		for (Sequence key : sequenceScores.keySet()) {
-			if (trainingSubset.size() < 3) {
+			int random = ThreadLocalRandom.current().nextInt(0, 10 + 1);
+			if (trainingSubset.size() < 3 && random > 3) {
 				System.out.println(
 						"Adding " + key.getSequence() + " as training sequence. Score: " + sequenceScores.get(key));
 				trainingSubset.add(key.getSequence());
