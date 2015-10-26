@@ -65,6 +65,7 @@ public class SequenceController {
 		}
 
 		// TODO select first hit at random from trainingSubset
+		// TODO pass first hit to generator
 
 		// Train HTM, create and return new sequence
 		String sequence = generator.generate(trainingSubset);

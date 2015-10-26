@@ -1,0 +1,133 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    background: #1B1B1B;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+td {
+    padding: 3px 2px 3px 2px;
+}
+
+#indicator-lights, #drums {
+    margin-bottom: 10px;
+}
+
+.sequencer {
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(top, #2A2A2C 0%, #030305 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#2A2A2C), to(#030305));
+}
+
+.drum-label {
+    padding-top: 17px;
+    background-image: linear-gradient(top, #383838 0%, #1F1F1F 5%, #161616 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#1F1F1F), to(#161616));
+}
+
+.even {
+    background-image: linear-gradient(top, #505052, #3F3F41 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#505052), to(#3F3F41));
+}
+
+.odd {
+    background-image: linear-gradient(top, #817F80 5%, #636365 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#817F80), to(#636365));
+}
+
+.active {
+    background-image: linear-gradient(top, #FF4F4F 5%, #CC0000 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#FF4F4F), to(#CC0000));
+}
+
+.drum-button-wrapper {
+    height: 60px;
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(top, #161616 0%, #1F1F1F 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#161616), to(#1F1F1F));
+}
+
+.drum-button {
+    height: 100%;
+    color: #818181;
+    border-radius: 7px;
+    float: left;
+    box-shadow: 0 0 1px 1px rgb(10, 10, 10);
+    cursor: pointer;
+    position: relative;
+    font: normal 20px arial;
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: bottom;
+    transition: color .3s ease;
+}
+
+.drum-button:hover {
+    color: #9E9E9E;
+}
+
+.drum-button:active {
+    box-shadow: 0 0 1px 1px rgb(10, 10, 10),
+    inset 0 2px 2px 0 black;
+}
+
+.drum-label:before {
+    position: absolute;
+    content: '';
+    right: 15px;
+    top: 10px;
+    width: 12px;
+    height: 12px;
+    background: #646464;
+    background-image: radial-gradient(top, #616161 0%, #616161 20%, #535353 60%);
+    border-radius: 50%;
+    box-shadow: 0 0 4px #1C1C17;
+    transition: all .3s ease;
+}
+
+.drum-label:hover:before {
+    background: #FF4F4F;
+    box-shadow: 0 0 4px #1C1C17,
+    0 0 5px #FF4242;
+}
+
+.drum-label:active:before {
+    box-shadow: 0 0 4px #1C1C17,
+    inset 0 2px 2px 0 #CC0000;
+}
+
+.drum-button:nth-child(1) {
+    width: 100%;
+    margin-right: 2%;
+}
+
+.step-indicator {
+    height: 10px;
+    text-align: center;
+    margin-left: -6px;
+}
+
+.step-indicator:before {
+    position: absolute;
+    content: '';
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    background-image: radial-gradient(ellipse farthest-corner at 470px 47px, #CC0000 30%, #FF4F4F 60%);
+    border-radius: 50%;
+    box-shadow: 0 0 4px #1C1C17;
+    transition: all .3s ease;
+}
