@@ -11,16 +11,20 @@
 
 	<title>AI-909: Intelligent Rhythm Composer</title>
 
-	<!-- Bootstrap core CSS -->
-	<link href="styles.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
 </head>
 
 <body>
 
+<div style="padding-bottom: 5px;">
+	<span style="color: #818181; font-size: 50px; font-family: tr-909regular">AI-909</span>
+	<span style="color: #818181; font-size: 30px; float: right; font-family: tr-909regular; padding-top: 5px;">Intelligent Rhythm Composer</span>
+</div>
 <table id="indicator-lights" class="sequencer">
 	<!-- Step Indicator -->
 	<tr>
-		<td width="160px">
+		<td width="150px">
 
 		</td>
 		<!-- Steps -->
@@ -79,7 +83,7 @@
 
 	<!-- Kick -->
 	<tr>
-		<td width="160px">
+		<td width="150px">
 			<div class="drum-button-wrapper">
 				<div id="kick" class="drum-button drum-label">KICK</div>
 			</div>
@@ -169,7 +173,7 @@
 
 	<!-- Snare -->
 	<tr>
-		<td>
+		<td width="150px">
 			<div class="drum-button-wrapper drum-label-wrapper">
 				<div id="snare" class="drum-button drum-label">SNARE</div>
 			</div>
@@ -259,7 +263,7 @@
 
 	<!-- Hihat -->
 	<tr>
-		<td>
+		<td width="150px">
 			<div class="drum-button-wrapper drum-label-wrapper">
 				<div id="hihat" class="drum-button drum-label">HIHAT</div>
 			</div>
@@ -351,35 +355,52 @@
 <table id="controls" class="sequencer">
 
 	<tr>
-		<td width="160px">
-			<div class="drum-button-wrapper">
-				<div id="play" class="drum-button drum-label">PLAY / PAUSE</div>
+		<td style="text-align: center">
+			<div id="play" class="control">
+				<span id="play-icon" class="glyphicon glyphicon-play"></span>
 			</div>
-		</td>
-		<td width="160px">
-			<div class="drum-button-wrapper">
-				<div class="drum-button drum-label">STOP</div>
+
+			<div id="stop" class="control">
+				<span class="glyphicon glyphicon-stop"></span>
 			</div>
-		</td>
-		<td width="160px">
-			<div class="drum-button-wrapper">
-				<div id="generate" class="drum-button drum-label">GENERATE</div>
+
+		<td style="text-align: center">
+			<div id="generate" class="control">
+				<span class="glyphicon glyphicon-refresh"></span>
+			</div>
+
+			<div id="mutate" class="control">
+				<span class="glyphicon glyphicon-random"></span>
 			</div>
 		</td>
 
-		<td width="160px">
-			<div class="drum-button-wrapper">
-				<div class="drum-button drum-label">LEARN</div>
-			</div>
+		<td style="text-align: center">
+			<table>
+				<tr>
+					<td style="text-align: center">
+						<div id="lower-bpm" class="control">
+							<span class="glyphicon glyphicon-minus"></span>
+						</div>
+					</td>
+
+					<td style="text-align: center">
+						<div style="display: inline-block">
+							<span id="bpm" style="font-family: 'DigitalCounter7'; font-weight: bold; font-size: 50px; text-shadow:0 0 30px #CC0000; color: #CC0000">175</span>
+						</div>
+					</td>
+
+					<td style="text-align: center">
+						<div id="increase-bpm" class="control">
+							<span class="glyphicon glyphicon-plus"></span>
+						</div>
+					</td>
+				</tr>
+			</table>
 		</td>
-		<td width="160px">
-			<div class="drum-button-wrapper">
-				<div class="drum-button drum-label">CLEAR</div>
-			</div>
-		</td>
+
+
 	</tr>
 </table>
-
 
 <script src="https://code.createjs.com/soundjs-0.6.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

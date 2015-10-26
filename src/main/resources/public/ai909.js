@@ -3,7 +3,7 @@ var CHANNEL_NAMES = {1: "KICK", 2: "SNARE", 3: "HIHAT"};
 var Sequencer = {};
 Sequencer.step = 0;
 Sequencer.playing = false;
-Sequencer.bpm = 180;
+Sequencer.bpm = 175;
 Sequencer.channels = {};
 Sequencer.channels.KICK = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 Sequencer.channels.SNARE = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -44,73 +44,60 @@ $(document).ready(function () {
 
     $("#play").click(function () {
         Sequencer.playing = !Sequencer.playing;
+        var $playIcon = $("#play-icon");
         if (Sequencer.playing) {
             play();
+            $playIcon.removeClass("glyphicon-play");
+            $playIcon.addClass("glyphicon-pause");
+        } else {
+            $playIcon.removeClass("glyphicon-pause");
+            $playIcon.addClass("glyphicon-play");
         }
+    });
+
+    $("#stop").click(function () {
+        Sequencer.playing = false;
+        Sequencer.step = 0;
+        var $playIcon = $("#play-icon");
+        $playIcon.removeClass("glyphicon-pause");
+        $playIcon.addClass("glyphicon-play");
     });
 
     $("#generate").click(function () {
 
-        $.get("/getSequence?bpm=180&intensity=0.5", function (data) {
-            for (var i = 0; i < data.sequence.length; i++) {
+        // TODO disable button until call returns
+        // TODO same for mutate...
 
-                var value = data.sequence.charAt(i);
-                switch(value) {
-                    case "0":
-                        Sequencer.channels.KICK[i] = 0;
-                        Sequencer.channels.SNARE[i] = 0;
-                        Sequencer.channels.HIHAT[i] = 0;
-                        break;
-                    case "1":
-                        Sequencer.channels.KICK[i] = 0;
-                        Sequencer.channels.SNARE[i] = 0;
-                        Sequencer.channels.HIHAT[i] = 1;
-                        break;
-                    case "2":
-                        Sequencer.channels.KICK[i] = 0;
-                        Sequencer.channels.SNARE[i] = 1;
-                        Sequencer.channels.HIHAT[i] = 0;
-                        break;
-                    case "3":
-                        Sequencer.channels.KICK[i] = 1;
-                        Sequencer.channels.SNARE[i] = 0;
-                        Sequencer.channels.HIHAT[i] = 0;
-                        break;
-                    case "4":
-                        Sequencer.channels.KICK[i] = 0;
-                        Sequencer.channels.SNARE[i] = 1;
-                        Sequencer.channels.HIHAT[i] = 1;
-                        break;
-                    case "5":
-                        Sequencer.channels.KICK[i] = 1;
-                        Sequencer.channels.SNARE[i] = 0;
-                        Sequencer.channels.HIHAT[i] = 1;
-                        break;
-                    case "6":
-                        Sequencer.channels.KICK[i] = 1;
-                        Sequencer.channels.SNARE[i] = 1;
-                        Sequencer.channels.HIHAT[i] = 0;
-                        break;
-                    case "7":
-                        Sequencer.channels.KICK[i] = 1;
-                        Sequencer.channels.SNARE[i] = 1;
-                        Sequencer.channels.HIHAT[i] = 1;
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            updateButtons();
-
+        $.get("/getSequence?bpm=" + Sequencer.bpm + "&intensity=0.5", function (data) {
+            setSequence(data.sequence)
         });
-    })
+    });
+
+    $("#mutate").click(function () {
+
+        // TODO disable button until call returns
+        // TODO same for mutate...
+
+        $.get("/getSequence?seedSequence=" + getSeedString() + "&bpm=" + Sequencer.bpm + "&intensity=0.5", function (data) {
+            setSequence(data.sequence)
+        });
+    });
+
+    $("#lower-bpm").click(function () {
+        Sequencer.bpm--;
+        updateBpmDisplay();
+    });
+
+    $("#increase-bpm").click(function () {
+        Sequencer.bpm++;
+        updateBpmDisplay();
+    });
 });
 
 function loadSounds() {
-    createjs.Sound.registerSound("audio/Kick01.mp3", "kick");
-    createjs.Sound.registerSound("audio/Snare01.mp3", "snare");
-    createjs.Sound.registerSound("audio/Hat01.mp3", "hihat");
+    createjs.Sound.registerSound("audio/kick 01.mp3", "kick");
+    createjs.Sound.registerSound("audio/snare 17.mp3", "snare");
+    createjs.Sound.registerSound("audio/hh 03.mp3", "hihat");
 }
 
 function play() {
@@ -130,11 +117,12 @@ function play() {
         Sequencer.step = 0;
     }
 
+    var delay = 60000 / Sequencer.bpm / 2;
     setTimeout(function () {
         if (Sequencer.playing) {
             play();
         }
-    }, 167)
+    }, delay)
 }
 
 function updateButtons() {
@@ -162,4 +150,91 @@ function updateButtons() {
             $(buttons[i + 32]).removeClass("active");
         }
     }
+}
+
+function updateBpmDisplay() {
+    $("#bpm").text(Sequencer.bpm);
+}
+
+function getSeedString() {
+    var seedString = "";
+    for (var i = 0; i < Sequencer.channels.KICK.length; i++) {
+        seedString += getEncoding(Sequencer.channels.KICK[i], Sequencer.channels.SNARE[i], Sequencer.channels.HIHAT[i]);
+    }
+    return seedString;
+}
+
+function getEncoding(kick, snare, hihat) {
+
+    if (kick == 1 && snare == 1 && hihat == 1) {
+        return "7";
+    } else if (kick == 1 && snare == 1 && hihat == 0) {
+        return "6";
+    } else if (kick == 1 && snare == 0 && hihat == 1) {
+        return "5";
+    } else if (kick == 0 && snare == 1 && hihat == 1) {
+        return "4";
+    } else if (kick == 1 && snare == 0 && hihat == 0) {
+        return "3";
+    } else if (kick == 0 && snare == 1 && hihat == 0) {
+        return "2";
+    } else if (kick == 0 && snare == 0 && hihat == 1) {
+        return "1";
+    } else if (kick == 0 && snare == 0 && hihat == 0) {
+        return "0";
+    }
+
+}
+
+function setSequence(sequence) {
+    for (var i = 0; i < sequence.length; i++) {
+
+        var value = sequence.charAt(i);
+        switch (value) {
+            case "0":
+                Sequencer.channels.KICK[i] = 0;
+                Sequencer.channels.SNARE[i] = 0;
+                Sequencer.channels.HIHAT[i] = 0;
+                break;
+            case "1":
+                Sequencer.channels.KICK[i] = 0;
+                Sequencer.channels.SNARE[i] = 0;
+                Sequencer.channels.HIHAT[i] = 1;
+                break;
+            case "2":
+                Sequencer.channels.KICK[i] = 0;
+                Sequencer.channels.SNARE[i] = 1;
+                Sequencer.channels.HIHAT[i] = 0;
+                break;
+            case "3":
+                Sequencer.channels.KICK[i] = 1;
+                Sequencer.channels.SNARE[i] = 0;
+                Sequencer.channels.HIHAT[i] = 0;
+                break;
+            case "4":
+                Sequencer.channels.KICK[i] = 0;
+                Sequencer.channels.SNARE[i] = 1;
+                Sequencer.channels.HIHAT[i] = 1;
+                break;
+            case "5":
+                Sequencer.channels.KICK[i] = 1;
+                Sequencer.channels.SNARE[i] = 0;
+                Sequencer.channels.HIHAT[i] = 1;
+                break;
+            case "6":
+                Sequencer.channels.KICK[i] = 1;
+                Sequencer.channels.SNARE[i] = 1;
+                Sequencer.channels.HIHAT[i] = 0;
+                break;
+            case "7":
+                Sequencer.channels.KICK[i] = 1;
+                Sequencer.channels.SNARE[i] = 1;
+                Sequencer.channels.HIHAT[i] = 1;
+                break;
+            default:
+                break;
+        }
+    }
+
+    updateButtons();
 }

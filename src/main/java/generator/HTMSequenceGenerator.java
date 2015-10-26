@@ -64,7 +64,7 @@ public class HTMSequenceGenerator {
 		cellsPerColumn = memory.getCellsPerColumn();
 	}
 
-	public String generate(List<String> sequences) {
+	public String generate(List<String> sequences, Double firstHit) {
 
 		int charIndex = -1;
 		int sequenceIndex = 0;
@@ -115,7 +115,7 @@ public class HTMSequenceGenerator {
 		int[] output = new int[columnCount];
 
 		String stringSequence = String.valueOf(sequences.get(0).charAt(0));
-		double value = Math.round(Double.valueOf(stringSequence));
+		double value = firstHit;
 
 		for (int i = 0; i < (sequences.get(0).length()); i++) {
 
