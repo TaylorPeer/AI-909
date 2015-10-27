@@ -9,6 +9,9 @@ Sequencer.channels.KICK = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 Sequencer.channels.SNARE = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 Sequencer.channels.HIHAT = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 Sequencer.sequenceString = "0000000000000000";
+Sequencer.bank = 1;
+
+var waitingForResponse = false;
 
 $(document).ready(function () {
 
@@ -17,16 +20,19 @@ $(document).ready(function () {
     // Add listeners to all step buttons
     $(".drum-button").not(".drum-label").click(function () {
 
-        var channelIndex = $(this).parent().parent().parent().index() + 1;
-        var channelName = CHANNEL_NAMES[channelIndex];
-        var step = $(this).parent().parent().index() - 1;
+        if (!waitingForResponse) {
 
-        if ($(this).hasClass("active")) {
-            $(this).removeClass("active");
-            Sequencer.channels[channelName][step] = 0;
-        } else {
-            $(this).addClass("active");
-            Sequencer.channels[channelName][step] = 1;
+            var channelIndex = $(this).parent().parent().parent().index() + 1;
+            var channelName = CHANNEL_NAMES[channelIndex];
+            var step = $(this).parent().parent().index() - 1;
+
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active");
+                Sequencer.channels[channelName][step] = 0;
+            } else {
+                $(this).addClass("active");
+                Sequencer.channels[channelName][step] = 1;
+            }
         }
     });
 
@@ -58,49 +64,73 @@ $(document).ready(function () {
     $("#stop").click(function () {
         Sequencer.playing = false;
         Sequencer.step = 0;
+        $(".step-indicator").fadeOut(50);
         var $playIcon = $("#play-icon");
         $playIcon.removeClass("glyphicon-pause");
         $playIcon.addClass("glyphicon-play");
     });
 
     $("#generate").click(function () {
-
-        // TODO disable button until call returns
-        // TODO same for mutate...
-
-        $.get("/getSequence?bpm=" + Sequencer.bpm + "&intensity=0.5", function (data) {
-            setSequence(data.sequence)
-        });
+        if (!waitingForResponse) {
+            waitingForResponse = true;
+            blink();
+            $.get("/getSequence?bpm=" + Sequencer.bpm + "&memoryBank=" + Sequencer.bank, function (data) {
+                setSequence(data.sequence);
+                waitingForResponse = false;
+            });
+        }
     });
 
     $("#mutate").click(function () {
+        if (!waitingForResponse) {
+            waitingForResponse = true;
+            blink();
+            $.get("/getSequence?seedSequence=" + getSeedString() + "&bpm=" + Sequencer.bpm + "&memoryBank=" + Sequencer.bank, function (data) {
+                setSequence(data.sequence);
+                waitingForResponse = false;
+            });
+        }
+    });
 
-        // TODO disable button until call returns
-        // TODO same for mutate...
-
-        $.get("/getSequence?seedSequence=" + getSeedString() + "&bpm=" + Sequencer.bpm + "&intensity=0.5", function (data) {
-            setSequence(data.sequence)
-        });
+    $("#learn").click(function () {
+        $.get("/learn?sequence=" + getSeedString() + "&bpm=" + Sequencer.bpm + "&memoryBank=" + Sequencer.bank);
     });
 
     $("#lower-bpm").click(function () {
-        Sequencer.bpm--;
+        Sequencer.bpm = Math.max(Sequencer.bpm - 1, 1);
         updateBpmDisplay();
     });
 
     $("#increase-bpm").click(function () {
-        Sequencer.bpm++;
+        Sequencer.bpm = Math.min(Sequencer.bpm + 1, 999);
         updateBpmDisplay();
+    });
+
+    $("#lower-bank").click(function () {
+        Sequencer.bank = Math.max(Sequencer.bank - 1, 1);
+        updateBankDisplay();
+    });
+
+    $("#increase-bank").click(function () {
+        Sequencer.bank = Math.min(Sequencer.bank + 1, 99);
+        updateBankDisplay();
     });
 });
 
 function loadSounds() {
     createjs.Sound.registerSound("audio/kick 01.mp3", "kick");
-    createjs.Sound.registerSound("audio/snare 17.mp3", "snare");
+    createjs.Sound.registerSound("audio/snare 14.mp3", "snare");
     createjs.Sound.registerSound("audio/hh 03.mp3", "hihat");
 }
 
 function play() {
+
+    $($(".step-indicator")[Sequencer.step]).fadeIn("fast");
+    var previousStep = Sequencer.step - 1;
+    if (previousStep < 0) {
+        previousStep = 15;
+    }
+    $($(".step-indicator")[previousStep]).fadeOut(50);
 
     if (Sequencer.channels.KICK[Sequencer.step]) {
         createjs.Sound.play("kick");
@@ -153,7 +183,21 @@ function updateButtons() {
 }
 
 function updateBpmDisplay() {
-    $("#bpm").text(Sequencer.bpm);
+    var text = Sequencer.bpm;
+    if (text < 10) {
+        text = "00" + text;
+    } else if (text < 100) {
+        text = "0" + text;
+    }
+    $("#bpm").text(text);
+}
+
+function updateBankDisplay() {
+    var text = Sequencer.bank;
+    if (text < 10) {
+        text = "0" + text;
+    }
+    $("#bank").text(text);
 }
 
 function getSeedString() {
@@ -237,4 +281,20 @@ function setSequence(sequence) {
     }
 
     updateButtons();
+}
+
+function blink() {
+    var delay = 200;
+
+    $(".drum-button.active").removeClass("active");
+
+    setTimeout(function () {
+        setSequence(getSeedString());
+        setTimeout(function () {
+            if (waitingForResponse) {
+                blink();
+            }
+        }, delay);
+    }, delay);
+
 }

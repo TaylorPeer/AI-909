@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,13 +30,34 @@ public class SequenceController {
 
 	private HTMSequenceGenerator generator;
 
-	public SequenceController() {
-		trainingSequences = loadTrainingData();
+	@RequestMapping("/learn")
+	public void learn(@RequestParam(value = "sequence", required = true) String sequenceString,
+			@RequestParam(value = "bpm") float bpm, @RequestParam(value = "memoryBank") int memoryBank) {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(memoryBank + "\t");
+		sb.append("user_sequence" + "\t");
+		sb.append(bpm + "\t");
+		sb.append(sequenceString);
+		
+		try {
+			Files.write(Paths.get(TRAINING_FILE), ("\n" + sb.toString()).getBytes(), StandardOpenOption.APPEND);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@RequestMapping("/getSequence")
-	public Sequence sequence(@RequestParam(value = "seedSequence", required = false) String seedSequenceString,
-			@RequestParam(value = "bpm") float bpm, @RequestParam(value = "intensity") float intensity) {
+	public Sequence getSequence(@RequestParam(value = "seedSequence", required = false) String seedSequenceString,
+			@RequestParam(value = "bpm") float bpm, @RequestParam(value = "memoryBank") int memoryBank) {
+
+		trainingSequences = loadTrainingData(memoryBank);
+
+		// If the bank is empty, nothing can be trained
+		if (trainingSequences.size() == 0) {
+			return new Sequence("0000000000000000", bpm);
+		}
 
 		// Reset the HTM on every request
 		generator = new HTMSequenceGenerator();
@@ -46,18 +70,16 @@ public class SequenceController {
 			// If a seed sequence was received, order all training data by
 			// similarity to it
 			Sequence seedSequence = new Sequence(seedSequenceString, bpm);
+			trainingSubset.add(seedSequenceString);
 			for (Sequence sequence : trainingSequences) {
 				sequenceScores.put(sequence, seedSequence.getSimilarity(sequence));
 			}
 		} else {
 
-			// Order all training data by similarity score to received BPM and
-			// intensity
+			// Order all training data by similarity score to received BPM
 			for (Sequence sequence : trainingSequences) {
 				float bpmScore = Math.abs(bpm - sequence.getBpm());
-				float intensityScore = Math.abs(intensity - sequence.getIntensity());
-				Float totalScore = (bpmScore + intensityScore) / 2;
-				sequenceScores.put(sequence, totalScore);
+				sequenceScores.put(sequence, bpmScore);
 			}
 
 			// Select a seed sequence
@@ -67,6 +89,7 @@ public class SequenceController {
 				seedSequence = key;
 				break;
 			}
+			trainingSubset.add(seedSequence.getSequence());
 			// Order all training data by similarity to selected seed
 			sequenceScores.clear();
 			for (Sequence sequence : trainingSequences) {
@@ -98,7 +121,7 @@ public class SequenceController {
 		return new Sequence(sequence, bpm);
 	}
 
-	private static List<Sequence> loadTrainingData() {
+	private static List<Sequence> loadTrainingData(int bank) {
 
 		BufferedReader reader = null;
 		String line = "";
@@ -108,8 +131,10 @@ public class SequenceController {
 			reader = new BufferedReader(new FileReader(TRAINING_FILE));
 			while ((line = reader.readLine()) != null) {
 				String[] entry = line.split(DELIMINATOR);
-				Sequence sequence = new Sequence(entry[2], Float.parseFloat(entry[1]));
-				sequences.add(sequence);
+				Sequence sequence = new Sequence(entry[3], Float.parseFloat(entry[2]));
+				if (Integer.valueOf(entry[0]) == bank) {
+					sequences.add(sequence);
+				}
 			}
 
 		} catch (FileNotFoundException e) {

@@ -68,7 +68,7 @@ public class HTMSequenceGenerator {
 
 		int charIndex = -1;
 		int sequenceIndex = 0;
-		for (int sequenceNum = 0; sequenceNum < (sequences.get(0).length() * 3000); sequenceNum++) {
+		for (int sequenceNum = 0; sequenceNum < (sequences.get(0).length() * 2000); sequenceNum++) {
 
 			if (charIndex == (sequences.get(0).length() - 1)) {
 				sequenceIndex = sequenceIndex + 1;
@@ -98,7 +98,7 @@ public class HTMSequenceGenerator {
 			spatialPooler.compute(memory, encoding, output, true, true);
 
 			// Let the SpatialPooler train independently (warm up) first
-			if (sequenceNum > 1500) {
+			if (sequenceNum > 1000) {
 
 				int[] input = ArrayUtils.where(output, ArrayUtils.WHERE_1);
 				ComputeCycle cc = temporalMemory.compute(memory, input, true);

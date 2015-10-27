@@ -23,7 +23,7 @@
 </div>
 <table id="indicator-lights" class="sequencer">
 	<!-- Step Indicator -->
-	<tr>
+	<tr height="16px">
 		<td width="150px">
 
 		</td>
@@ -355,7 +355,7 @@
 <table id="controls" class="sequencer">
 
 	<tr>
-		<td style="text-align: center">
+		<td style="text-align: center; width: 25%">
 			<div id="play" class="control">
 				<span id="play-icon" class="glyphicon glyphicon-play"></span>
 			</div>
@@ -364,17 +364,7 @@
 				<span class="glyphicon glyphicon-stop"></span>
 			</div>
 
-		<td style="text-align: center">
-			<div id="generate" class="control">
-				<span class="glyphicon glyphicon-refresh"></span>
-			</div>
-
-			<div id="mutate" class="control">
-				<span class="glyphicon glyphicon-random"></span>
-			</div>
-		</td>
-
-		<td style="text-align: center">
+		<td style="text-align: center; width: 25%">
 			<table>
 				<tr>
 					<td style="text-align: center">
@@ -398,6 +388,44 @@
 			</table>
 		</td>
 
+		<td style="text-align: center; width: 25%">
+			<div id="generate" class="control">
+				<span class="glyphicon glyphicon-refresh"></span>
+			</div>
+
+			<div id="mutate" class="control">
+				<span class="glyphicon glyphicon-random"></span>
+			</div>
+
+			<div id="learn" class="control">
+				<span class="glyphicon glyphicon-upload"></span>
+			</div>
+
+		</td>
+
+		<td style="text-align: center; width: 25%">
+			<table>
+				<tr>
+					<td style="text-align: center">
+						<div id="lower-bank" class="control">
+							<span class="glyphicon glyphicon-minus"></span>
+						</div>
+					</td>
+
+					<td style="text-align: center">
+						<div style="display: inline-block">
+							<span id="bank" style="font-family: 'DigitalCounter7'; font-weight: bold; font-size: 50px; text-shadow:0 0 30px #CC0000; color: #CC0000">01</span>
+						</div>
+					</td>
+
+					<td style="text-align: center">
+						<div id="increase-bank" class="control">
+							<span class="glyphicon glyphicon-plus"></span>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</td>
 
 	</tr>
 </table>

@@ -24,6 +24,7 @@
 }
 
 body {
+    min-width: 881px;
     background: #1B1B1B;
     user-select: none;
     -webkit-touch-callout: none;
@@ -120,8 +121,7 @@ td {
 
 .drum-label:hover:before {
     background: #FF4F4F;
-    box-shadow: 0 0 4px #1C1C17,
-    0 0 5px #FF4242;
+    box-shadow: 0 0 4px #1C1C17, 0 0 5px #FF4242;
 }
 
 .drum-label:active:before {
@@ -137,6 +137,7 @@ td {
     height: 10px;
     text-align: center;
     margin-left: -6px;
+    display: none;
 }
 
 .step-indicator:before {
@@ -153,12 +154,12 @@ td {
 }
 
 .control {
-    margin: 0 3px 0 3px;
+    display: inline-block;
+    margin: 0 1px 0 1px;
     min-width: 60px;
     padding-top: 14px;
     color: #818181;
     border-radius: 7px;
-    float: left;
     box-shadow: 0 0 1px 1px rgb(10, 10, 10);
     cursor: pointer;
     position: relative;
@@ -175,6 +176,5 @@ td {
 }
 
 .disabled {
-    box-shadow: 0 0 1px 1px rgb(10, 10, 10);
-!important;
+    box-shadow: 0 0 1px 1px rgb(10, 10, 10) !important;
 }
