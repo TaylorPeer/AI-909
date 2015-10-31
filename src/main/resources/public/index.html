@@ -17,461 +17,388 @@
 
 <body>
 
-<div style="padding-bottom: 5px;">
-	<span style="color: #818181; font-size: 50px; font-family: tr-909regular">AI-909</span>
-	<span style="color: #818181; font-size: 30px; float: right; font-family: tr-909regular; padding-top: 5px;">Intelligent Rhythm Composer</span>
-</div>
-<table id="indicator-lights" class="sequencer">
-	<!-- Step Indicator -->
-	<tr height="16px">
-		<td width="120px">
+<div id="app">
 
-		</td>
-		<!-- Steps -->
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-		<td>
-			<div class="step-indicator"></div>
-		</td>
-	</tr>
-</table>
+	<div style="padding-bottom: 5px;">
+		<span style="color: #818181; font-size: 80px; font-family: tr-909regular">AI-909</span>
+		<span style="color: #818181; font-size: 30px; float: right; font-family: tr-909regular; padding-top: 12px;">Intelligent Rhythm Composer</span>
+	</div>
+	<table id="indicator-lights" class="sequencer">
+		<!-- Step Indicator -->
+		<tr height="16px">
+			<td width="120px">
 
-<table id="drums" class="sequencer">
+			</td>
+			<!-- Steps -->
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+			<td>
+				<div class="step-indicator"></div>
+			</td>
+		</tr>
+	</table>
 
-	<!-- Kick -->
-	<tr>
-		<td width="120px">
-			<div class="drum-button-wrapper">
-				<div id="kick" class="drum-button drum-label">KICK</div>
-			</div>
-		</td>
-		<!-- Steps -->
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-	</tr>
+	<table id="drums" class="sequencer">
 
-	<!-- Snare -->
-	<tr>
-		<td width="120px">
-			<div class="drum-button-wrapper drum-label-wrapper">
-				<div id="snare" class="drum-button drum-label">SNARE</div>
-			</div>
-		</td>
-		<!-- Steps -->
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-	</tr>
+		<!-- Kick -->
+		<tr>
+			<td width="120px">
+				<div class="drum-button-wrapper">
+					<div id="kick" class="drum-button drum-label">KICK</div>
+				</div>
+			</td>
+			<!-- Steps -->
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+		</tr>
 
-	<!-- Hihat -->
-	<tr>
-		<td width="120px">
-			<div class="drum-button-wrapper drum-label-wrapper">
-				<div id="hihat" class="drum-button drum-label">HIHAT</div>
-			</div>
-		</td>
-		<!-- Steps -->
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button even"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-		<td>
-			<div class="drum-button-wrapper">
-				<div class="drum-button odd"></div>
-			</div>
-		</td>
-	</tr>
-</table>
+		<!-- Snare -->
+		<tr>
+			<td width="120px">
+				<div class="drum-button-wrapper drum-label-wrapper">
+					<div id="snare" class="drum-button drum-label">SNARE</div>
+				</div>
+			</td>
+			<!-- Steps -->
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+		</tr>
 
-<table id="controls" class="sequencer">
+		<!-- Hihat -->
+		<tr>
+			<td width="120px">
+				<div class="drum-button-wrapper drum-label-wrapper">
+					<div id="hihat" class="drum-button drum-label">HIHAT</div>
+				</div>
+			</td>
+			<!-- Steps -->
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+		</tr>
+	</table>
 
-	<tr>
-		<td style="text-align: center; width: 18%">
-			<table>
-				<tr>
-					<td>
-						<div>
-							<div id="play" class="control">
-								<span id="play-icon" class="glyphicon glyphicon-play"></span>
+	<table id="controls" class="sequencer">
+
+		<tr>
+			<td style="text-align: center; width: 18%">
+				<table>
+					<tr>
+						<td>
+							<div>
+								<div id="play" class="control">
+									<span id="play-icon" class="glyphicon glyphicon-play"></span>
+								</div>
+
+								<div id="stop" class="control">
+									<span class="glyphicon glyphicon-stop"></span>
+								</div>
 							</div>
-
-							<div id="stop" class="control">
-								<span class="glyphicon glyphicon-stop"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="button-label">
+								Playback
 							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="button-label">
-							Playback
-						</div>
-					</td>
-				</tr>
-			</table>
-		</td>
+						</td>
+					</tr>
+				</table>
+			</td>
 
-		<td style="text-align: center; width: 30%">
-			<table style="margin: auto;">
-				<tr>
-					<td style="text-align: center">
-						<div id="lower-bpm" class="control">
-							<span class="glyphicon glyphicon-minus"></span>
-						</div>
-					</td>
-
-					<td style="text-align: center">
-						<div style="display: inline-block">
-							<span id="bpm" style="font-family: 'DigitalCounter7'; font-weight: bold; font-size: 50px; text-shadow:0 0 30px #CC0000; color: #CC0000">175</span>
-						</div>
-					</td>
-
-					<td style="text-align: center">
-						<div id="increase-bpm" class="control">
-							<span class="glyphicon glyphicon-plus"></span>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<div class="button-label">
-							Beats per Minute
-						</div>
-					</td>
-				</tr>
-			</table>
-		</td>
-
-		<td style="text-align: center; width: 26%">
-			<table style="margin: auto;">
-				<tr>
-					<td style="text-align: center">
-						<div id="generate" class="control">
-							<span class="glyphicon glyphicon-refresh"></span>
-						</div>
-					</td>
-
-					<td style="text-align: center">
-						<div id="mutate" class="control">
-							<span class="glyphicon glyphicon-random"></span>
-						</div>
-					</td>
-
-					<td style="text-align: center">
-						<div id="learn" class="control">
-							<span class="glyphicon glyphicon-upload"></span>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td style="text-align: center">
-						<div class="button-label">
-							Generate
-						</div>
-					</td>
-
-					<td style="text-align: center">
-						<div class="button-label">
-							Mutate
-						</div>
-					</td>
-
-					<td style="text-align: center">
-						<div class="button-label">
-							Learn
-						</div>
-					</td>
-				</tr>
-			</table>
-		</td>
-
-		<td style="text-align: center; width: 26%">
-			<div>
+			<td style="text-align: center; width: 30%">
 				<table style="margin: auto;">
 					<tr>
 						<td style="text-align: center">
-							<div id="lower-bank" class="control">
+							<div id="lower-bpm" class="control">
 								<span class="glyphicon glyphicon-minus"></span>
 							</div>
 						</td>
 
 						<td style="text-align: center">
 							<div style="display: inline-block">
-								<span id="bank" style="font-family: 'DigitalCounter7'; font-weight: bold; font-size: 50px; text-shadow:0 0 30px #CC0000; color: #CC0000">01</span>
+								<span id="bpm" style="font-family: 'DigitalCounter7'; font-weight: bold; font-size: 50px; text-shadow:0 0 10px #CC0000; color: #CC0000; padding-left: 5px;">175</span>
 							</div>
 						</td>
 
 						<td style="text-align: center">
-							<div id="increase-bank" class="control">
+							<div id="increase-bpm" class="control">
 								<span class="glyphicon glyphicon-plus"></span>
 							</div>
 						</td>
@@ -479,16 +406,93 @@
 					<tr>
 						<td colspan="3">
 							<div class="button-label">
-								Memory Location
+								Beats per Minute
 							</div>
 						</td>
 					</tr>
 				</table>
-			</div>
-		</td>
+			</td>
 
-	</tr>
-</table>
+			<td style="text-align: center; width: 26%">
+				<table style="margin: auto;">
+					<tr>
+						<td style="text-align: center">
+							<div id="generate" class="control">
+								<span class="glyphicon glyphicon-refresh"></span>
+							</div>
+						</td>
+
+						<td style="text-align: center">
+							<div id="mutate" class="control">
+								<span class="glyphicon glyphicon-random"></span>
+							</div>
+						</td>
+
+						<td style="text-align: center">
+							<div id="learn" class="control">
+								<span class="glyphicon glyphicon-upload"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: center">
+							<div class="button-label">
+								Generate
+							</div>
+						</td>
+
+						<td style="text-align: center">
+							<div class="button-label">
+								Mutate
+							</div>
+						</td>
+
+						<td style="text-align: center">
+							<div class="button-label">
+								Learn
+							</div>
+						</td>
+					</tr>
+				</table>
+			</td>
+
+			<td style="text-align: center; width: 26%">
+				<div>
+					<table style="margin: auto;">
+						<tr>
+							<td style="text-align: center">
+								<div id="lower-bank" class="control">
+									<span class="glyphicon glyphicon-minus"></span>
+								</div>
+							</td>
+
+							<td style="text-align: center">
+								<div style="display: inline-block">
+									<span id="bank" style="font-family: 'DigitalCounter7'; font-weight: bold; font-size: 50px; text-shadow: 0 0 10px #CC0000; color: #CC0000; padding-left: 5px;">01</span>
+								</div>
+							</td>
+
+							<td style="text-align: center">
+								<div id="increase-bank" class="control">
+									<span class="glyphicon glyphicon-plus"></span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<div class="button-label">
+									Memory Location
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+
+		</tr>
+	</table>
+
+</div>
 
 <script src="https://code.createjs.com/soundjs-0.6.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

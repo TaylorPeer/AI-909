@@ -151,20 +151,27 @@ public class SequenceController {
 					lastSequencesReturned.add(precomputedSequence);
 					precomputedSequences.get(memoryBank).remove(precomputedSequence);
 					precomputeSequences(memoryBank);
+					recordReturnedSequence(precomputedSequence);
 					return new Sequence(precomputedSequence, bpm);
 				}
 			}
 		}
 
 		String sequenceString = generateSequence(seedSequenceString, bpm, memoryBank);
+		recordReturnedSequence(sequenceString);
+		return new Sequence(sequenceString, bpm);
+	}
 
-		// Record sequence in memory to prevent returning it again in the near future
+	/**
+	 * Records sequence in memory to prevent returning it again in the near future.
+	 * 
+	 * @param sequenceString
+	 */
+	private void recordReturnedSequence(String sequenceString) {
 		lastSequencesReturned.add(sequenceString);
 		while (lastSequencesReturned.size() > MAX_SEQUENCE_MEMORY) {
 			lastSequencesReturned.remove(0);
 		}
-
-		return new Sequence(sequenceString, bpm);
 	}
 
 	/**

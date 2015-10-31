@@ -124,7 +124,7 @@ td {
 .step-indicator:before {
     position: absolute;
     content: '';
-    top: 56px;
+    top: 73px;
     width: 12px;
     height: 12px;
     text-align: center;
@@ -169,4 +169,12 @@ td {
     color: #818181;
     padding-top: 10px;
     font-family: Arial;
+}
+
+.blink {
+    animation: blinker 400ms linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0.0; }
 }

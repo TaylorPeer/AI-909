@@ -11,6 +11,9 @@ Sequencer.channels.HIHAT = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 Sequencer.sequenceString = "0000000000000000";
 Sequencer.bank = 1;
 
+var updateSteps = function () {
+};
+
 var waitingForResponse = false;
 var interactionEvent = "click";
 
@@ -58,6 +61,10 @@ $(document).ready(function () {
 
     if (isMobile) {
         interactionEvent = "touchstart";
+        $("#app").css({position: "relative", top: "50%", transform: "translateY(-50%)"});
+        var height = $(window).height();
+        $("body").height(height + 80);
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
     loadSounds();
@@ -125,6 +132,9 @@ $(document).ready(function () {
         var $playIcon = $("#play-icon");
         $playIcon.removeClass("glyphicon-pause");
         $playIcon.addClass("glyphicon-play");
+        updateSteps();
+        updateSteps = function () {
+        };
     });
 
     $("#generate").bind(interactionEvent, function () {
@@ -132,8 +142,15 @@ $(document).ready(function () {
             waitingForResponse = true;
             blink();
             $.get("/getSequence?bpm=" + Sequencer.bpm + "&memoryBank=" + Sequencer.bank, function (data) {
-                setSequence(data.sequence);
-                waitingForResponse = false;
+                if (Sequencer.playing) {
+                    updateSteps = function () {
+                        setSequence(data.sequence);
+                        waitingForResponse = false;
+                    };
+                } else {
+                    setSequence(data.sequence);
+                    waitingForResponse = false;
+                }
             });
         }
     });
@@ -143,8 +160,15 @@ $(document).ready(function () {
             waitingForResponse = true;
             blink();
             $.get("/getSequence?seedSequence=" + getSeedString() + "&bpm=" + Sequencer.bpm + "&memoryBank=" + Sequencer.bank, function (data) {
-                setSequence(data.sequence);
-                waitingForResponse = false;
+                if (Sequencer.playing) {
+                    updateSteps = function () {
+                        setSequence(data.sequence);
+                        waitingForResponse = false;
+                    };
+                } else {
+                    setSequence(data.sequence);
+                    waitingForResponse = false;
+                }
             });
         }
     });
@@ -193,15 +217,18 @@ function play() {
     }
 
     var stepIndicator = $(".step-indicator");
-    $(stepIndicator[Sequencer.step]).fadeIn("fast");
+    $(stepIndicator[Sequencer.step]).show();
     var previousStep = Sequencer.step - 1;
     if (previousStep < 0) {
         previousStep = 15;
     }
-    $(stepIndicator[previousStep]).fadeOut(50);
+    $(stepIndicator[previousStep]).hide();
 
     Sequencer.step = Sequencer.step + 1;
     if (Sequencer.step > 15) {
+        updateSteps();
+        updateSteps = function () {
+        };
         Sequencer.step = 0;
     }
 
@@ -214,6 +241,7 @@ function play() {
 }
 
 function updateButtons() {
+    $(".drum-button.active").removeClass("blink");
     var buttons = $(".drum-button").not(".drum-label");
     for (var i = 0; i < 16; i++) {
 
@@ -342,16 +370,5 @@ function setSequence(sequence) {
 }
 
 function blink() {
-    var delay = 200;
-
-    $(".drum-button.active").removeClass("active");
-
-    setTimeout(function () {
-        setSequence(getSeedString());
-        setTimeout(function () {
-            if (waitingForResponse) {
-                blink();
-            }
-        }, delay);
-    }, delay);
+    $(".drum-button.active").addClass("blink");
 }
