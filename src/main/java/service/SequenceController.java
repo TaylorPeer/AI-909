@@ -95,10 +95,12 @@ public class SequenceController {
 		}
 
 		// Check if sequence already exists in memory bank
-		List<Sequence> loadTrainingData = loadTrainingData(memoryBank);
-		if (loadTrainingData.contains(sequenceString)) {
-			log.info("Sequence already exists in memory bank: " + sequenceString);
-			return;
+		List<Sequence> trainingData = loadTrainingData(memoryBank);
+		for (Sequence trainingSequence : trainingData) {
+			if (trainingSequence.getSequence().equals(sequenceString)) {
+				log.info("Sequence already exists in memory bank: " + sequenceString);
+				return;
+			}
 		}
 
 		log.info("Sequence to learn: " + sequenceString);
@@ -261,9 +263,10 @@ public class SequenceController {
 
 		String[] drums = { "0", "1", "2", "3", "4", "5", "6", "7" };
 
+		// TODO base sparsity on training sequences!
 		// Check sparsity
 		int emptyBeats = StringUtils.countMatches(sequenceString, "0");
-		int sequenceSparsityThreshold = (sequenceString.length() / 2) + 1;
+		int sequenceSparsityThreshold = (sequenceString.length() / 2);
 		if (emptyBeats > sequenceSparsityThreshold) {
 			log.error("Sequence was too sparse: " + sequenceString + " (contained " + emptyBeats + " empty beats)");
 			return false;
