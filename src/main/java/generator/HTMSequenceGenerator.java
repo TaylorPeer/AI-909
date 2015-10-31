@@ -22,13 +22,14 @@ import org.numenta.nupic.util.ArrayUtils;
 
 import gnu.trove.list.array.TIntArrayList;
 
+/**
+ * Wrapper class for the HTM. Generates new sequences after being given sample sequences to learn from.
+ * 
+ * @author taylorpeer
+ */
 public class HTMSequenceGenerator {
 
-	static boolean isResetting = true;
-
 	private Connections memory = new Connections();
-
-	private Map<String, Object> classification = new LinkedHashMap<String, Object>();
 
 	private int columnCount;
 
@@ -64,8 +65,19 @@ public class HTMSequenceGenerator {
 		cellsPerColumn = memory.getCellsPerColumn();
 	}
 
+	/**
+	 * Generates a new sequence, given a list of sequences to learn from and the first element that the generated
+	 * sequence should begin with.
+	 * 
+	 * @param sequences
+	 * @param firstHit
+	 * @return
+	 */
 	public String generate(List<String> sequences, Double firstHit) {
 
+		Map<String, Object> classification = new LinkedHashMap<String, Object>();
+
+		boolean isResetting = true;
 		int charIndex = -1;
 		int sequenceIndex = 0;
 		for (int sequenceNum = 0; sequenceNum < (sequences.get(0).length() * 2000); sequenceNum++) {
@@ -85,8 +97,7 @@ public class HTMSequenceGenerator {
 
 			Double value = Double.parseDouble(String.valueOf(sequences.get(sequenceIndex).charAt(charIndex)));
 
-			// Use current character index for recordNum if re-cycling records -
-			// otherwise use "x" (the sequence number)
+			// Use current character index for recordNum if re-cycling records, otherwise use the sequence number
 			int recordNum = isResetting ? charIndex : sequenceNum;
 
 			int[] output = new int[columnCount];
@@ -119,8 +130,6 @@ public class HTMSequenceGenerator {
 
 		for (int i = 0; i < (sequences.get(0).length()); i++) {
 
-			// TODO debugging System.out.println("Input: " + value);
-
 			int[] encoding = encoder.encode(value);
 			int bucketIdx = encoder.getBucketIndices(value)[0];
 
@@ -139,16 +148,16 @@ public class HTMSequenceGenerator {
 				stringSequence += Math.round(value);
 			}
 
-			// TODO debugging
-			// System.out.println(Arrays.toString(result.getStats(1)));
-			// TODO debugging System.out.println("---");
-
 		}
-		// TODO debugging System.out.println("Predicted: " + stringSequence);
 
 		return stringSequence;
 	}
 
+	/**
+	 * Returns the parameters the HTM should be created with.
+	 * 
+	 * @return
+	 */
 	public static Parameters getParameters() {
 		Parameters parameters = Parameters.getAllDefaultParameters();
 		parameters.setParameterByKey(KEY.INPUT_DIMENSIONS, new int[] { 150 });
@@ -184,15 +193,7 @@ public class HTMSequenceGenerator {
 		return parameters;
 	}
 
-	public int[] inflateSDR(int[] SDR, int len) {
-		int[] retVal = new int[len];
-		for (int i : SDR) {
-			retVal[i] = 1;
-		}
-		return retVal;
-	}
-
-	public int[] getSDR(Set<Cell> cells) {
+	private int[] getSDR(Set<Cell> cells) {
 		int[] retVal = new int[cells.size()];
 		int i = 0;
 		for (Iterator<Cell> it = cells.iterator(); i < retVal.length; i++) {
