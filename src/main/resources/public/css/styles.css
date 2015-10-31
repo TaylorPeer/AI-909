@@ -24,6 +24,7 @@
 }
 
 body {
+    height: 784px;
     min-width: 881px;
     background: #1B1B1B;
     user-select: none;
@@ -103,29 +104,6 @@ td {
 
 .drum-button:active {
     box-shadow: 0 0 1px 1px rgb(10, 10, 10), inset 0 2px 2px 0 black;
-}
-
-.drum-label:before {
-    position: absolute;
-    content: '';
-    right: 15px;
-    top: 10px;
-    width: 12px;
-    height: 12px;
-    background: #646464;
-    background-image: radial-gradient(top, #616161 0%, #616161 20%, #535353 60%);
-    border-radius: 50%;
-    box-shadow: 0 0 4px #1C1C17;
-    transition: all .3s ease;
-}
-
-.drum-label:hover:before {
-    background: #FF4F4F;
-    box-shadow: 0 0 4px #1C1C17, 0 0 5px #FF4242;
-}
-
-.drum-label:active:before {
-    box-shadow: 0 0 4px #1C1C17, inset 0 2px 2px 0 #CC0000;
 }
 
 .drum-button:nth-child(1) {
