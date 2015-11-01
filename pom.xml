@@ -42,6 +42,7 @@
 	</dependencies>
 
 	<properties>
+		<start-class>service.SequenceService</start-class>
 		<java.version>1.8</java.version>
 	</properties>
 
