@@ -1,19 +1,21 @@
 # AI-909
-Intelligent Drum Machine powered by Numenta's Hierarchical Temporal Memory. Created for the [HTM Challenge 2015](http://htmchallenge.devpost.com/)
+Intelligent Drum Machine powered by Numenta's Hierarchical Temporal Memory. Created for the [HTM Challenge 2015](http://htmchallenge.devpost.com/).
 
 ## Requirements
 - Java 8
 - Maven
 
 ## Compatibility
-- Working on: Chrome, Safari, iOS
-- Known issues: Firefox, Android (maybe one day I will have the courage to open IE and test it there as well)
+- Tested and working on: Chrome (Mac and PC), Safari (Mac), Mobile Safari (iOS 8)
+- Known issues:
+  - Firefox: display issues, probably due to Webkit-specific CSS rules
+  - Android: works in Chrome on Android but the audio timing is way off. This is partially due to Android performance issues but mostly due to me using setTimeout to sync sounds rather than using the WebAudioAPI like I should.
 
 ## Instructions
-- **git clone** and cd to the top of the project directory
+- **git clone** and **cd** to the top of the project directory
 - **mvn spring-boot:run**
 - Open **http://localhost:8080/** in a compatible browser 
-- Alternatively: use your machine's local IP to run the frontend on a mobile device over a local network)
+- Alternatively: use your machine's local IP to run the frontend on a mobile device over a local network
 
 ## Notes
 - Memory bank 1 comes preloaded with breakbeat training sequences!
