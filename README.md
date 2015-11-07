@@ -1,6 +1,8 @@
 # AI-909
 Intelligent Drum Machine powered by Numenta's Hierarchical Temporal Memory. Created for the [HTM Challenge 2015](http://htmchallenge.devpost.com/).
 
+<img src="https://raw.githubusercontent.com/TaylorPeer/AI-909/master/ai909-ipad.jpg" height="300px">
+
 ## Requirements
 - Java 8
 - Maven
