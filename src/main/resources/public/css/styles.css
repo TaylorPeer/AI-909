@@ -176,5 +176,41 @@ td {
 }
 
 @keyframes blinker {
-    50% { opacity: 0.0; }
+    50% {
+        opacity: 0.0;
+    }
+}
+
+#memory {
+    text-align: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    height: 260px;
+    white-space: nowrap
+}
+
+#memory div {
+    display: inline-block;
+}
+
+.memory-drum {
+    min-width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+#model-pattern {
+    display: none;
+}
+
+.memory-sequence {
+    display: inline-block;
+    width: 260px;
+    border: 2px solid #818181;
+    padding: 20px;
+    padding-bottom: 0 !important;
+    border-radius: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
 }

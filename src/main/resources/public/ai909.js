@@ -1,4 +1,4 @@
-var CHANNEL_NAMES = {1: "KICK", 2: "SNARE", 3: "HIHAT"};
+var CHANNEL_NAMES = {3: "KICK", 2: "SNARE", 1: "HIHAT"};
 
 var Sequencer = {};
 Sequencer.step = 0;
@@ -68,6 +68,7 @@ $(document).ready(function () {
     }
 
     loadSounds();
+    loadMemory();
 
     // Add listeners to all step buttons
     $(".drum-button").not(".drum-label").bind(interactionEvent, function () {
@@ -174,7 +175,9 @@ $(document).ready(function () {
     });
 
     $("#learn").bind(interactionEvent, function () {
-        $.get("/learn?sequence=" + getSeedString() + "&bpm=" + Sequencer.bpm + "&memoryBank=" + Sequencer.bank);
+        $.get("/learn?sequence=" + getSeedString() + "&bpm=" + Sequencer.bpm + "&memoryBank=" + Sequencer.bank, function() {
+            loadMemory();
+        });
     });
 
     $("#lower-bpm").bind(interactionEvent, function () {
@@ -242,11 +245,11 @@ function play() {
 
 function updateButtons() {
     $(".drum-button.active").removeClass("blink");
-    var buttons = $(".drum-button").not(".drum-label");
+    var buttons = $($("#drums").find(".drum-button").not(".drum-label"));
     for (var i = 0; i < 16; i++) {
 
-        // Kick
-        if (Sequencer.channels.KICK[i]) {
+        // Hihat
+        if (Sequencer.channels.HIHAT[i]) {
             $(buttons[i]).addClass("active");
         } else {
             $(buttons[i]).removeClass("active");
@@ -259,8 +262,8 @@ function updateButtons() {
             $(buttons[i + 16]).removeClass("active");
         }
 
-        // Snare
-        if (Sequencer.channels.HIHAT[i]) {
+        // Kick
+        if (Sequencer.channels.KICK[i]) {
             $(buttons[i + 32]).addClass("active");
         } else {
             $(buttons[i + 32]).removeClass("active");
@@ -284,6 +287,7 @@ function updateBankDisplay() {
         text = "0" + text;
     }
     $("#bank").text(text);
+    loadMemory();
 }
 
 function getSeedString() {
@@ -370,5 +374,114 @@ function setSequence(sequence) {
 }
 
 function blink() {
-    $(".drum-button.active").addClass("blink");
+    $($("#drums").find(".drum-button.active")).addClass("blink");
+}
+
+function loadMemory() {
+
+    $("#memory").empty();
+
+    $.get("/getSequencesForMemoryBank?memoryBank=" + Sequencer.bank, function (data) {
+
+        data.forEach(function(sequence) {
+            var $copy = $("#model-pattern").clone();
+            $copy.css({display: "inline-block"}).removeAttr('id');
+
+            var $memory = $("#memory");
+            $memory.append($copy);
+            var count = $memory.children().length;
+            var element = $(".memory-sequence")[count - 1];
+            setMemorySequenceUI(element, sequence.sequence);
+            $(element).find("span").text("Sequence " + count);
+        });
+
+    });
+
+
+}
+
+function setMemorySequenceUI(element, sequence) {
+
+    var kickSequence = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var snareSequence = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var hihatSequence = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    for (var i = 0; i < sequence.length; i++) {
+
+        var value = sequence.charAt(i);
+        switch (value) {
+            case "0":
+                kickSequence[i] = 0;
+                snareSequence[i] = 0;
+                hihatSequence[i] = 0;
+                break;
+            case "1":
+                kickSequence[i] = 0;
+                snareSequence[i] = 0;
+                hihatSequence[i] = 1;
+                break;
+            case "2":
+                kickSequence[i] = 0;
+                snareSequence[i] = 1;
+                hihatSequence[i] = 0;
+                break;
+            case "3":
+                kickSequence[i] = 1;
+                snareSequence[i] = 0;
+                hihatSequence[i] = 0;
+                break;
+            case "4":
+                kickSequence[i] = 0;
+                snareSequence[i] = 1;
+                hihatSequence[i] = 1;
+                break;
+            case "5":
+                kickSequence[i] = 1;
+                snareSequence[i] = 0;
+                hihatSequence[i] = 1;
+                break;
+            case "6":
+                kickSequence[i] = 1;
+                snareSequence[i] = 1;
+                hihatSequence[i] = 0;
+                break;
+            case "7":
+                kickSequence[i] = 1;
+                snareSequence[i] = 1;
+                hihatSequence[i] = 1;
+                break;
+            default:
+                break;
+        }
+    }
+
+    updateMemoryButtons(element, kickSequence, snareSequence, hihatSequence);
+}
+
+function updateMemoryButtons(element, kickSequence, snareSequence, hihatSequence) {
+
+    var buttons = $(element).find(".drum-button").not(".drum-label");
+    for (var i = 0; i < 16; i++) {
+
+        // Hihat
+        if (hihatSequence[i]) {
+            $(buttons[i]).addClass("active");
+        } else {
+            $(buttons[i]).removeClass("active");
+        }
+
+        // Snare
+        if (snareSequence[i]) {
+            $(buttons[i + 16]).addClass("active");
+        } else {
+            $(buttons[i + 16]).removeClass("active");
+        }
+
+        // Kick
+        if (kickSequence[i]) {
+            $(buttons[i + 32]).addClass("active");
+        } else {
+            $(buttons[i + 32]).removeClass("active");
+        }
+    }
 }

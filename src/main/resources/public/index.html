@@ -83,11 +83,12 @@
 
 	<table id="drums" class="sequencer">
 
-		<!-- Kick -->
+
+		<!-- Hihat -->
 		<tr>
 			<td width="120px">
-				<div class="drum-button-wrapper">
-					<div id="kick" class="drum-button drum-label">KICK</div>
+				<div class="drum-button-wrapper drum-label-wrapper">
+					<div id="hihat" class="drum-button drum-label">HIHAT</div>
 				</div>
 			</td>
 			<!-- Steps -->
@@ -263,11 +264,11 @@
 			</td>
 		</tr>
 
-		<!-- Hihat -->
+		<!-- Kick -->
 		<tr>
 			<td width="120px">
-				<div class="drum-button-wrapper drum-label-wrapper">
-					<div id="hihat" class="drum-button drum-label">HIHAT</div>
+				<div class="drum-button-wrapper">
+					<div id="kick" class="drum-button drum-label">KICK</div>
 				</div>
 			</td>
 			<!-- Steps -->
@@ -352,12 +353,13 @@
 				</div>
 			</td>
 		</tr>
+
 	</table>
 
 	<table id="controls" class="sequencer">
 
 		<tr>
-			<td style="text-align: center; width: 18%">
+			<td style="text-align: center; width: 20%">
 				<table>
 					<tr>
 						<td>
@@ -413,18 +415,12 @@
 				</table>
 			</td>
 
-			<td style="text-align: center; width: 26%">
+			<td style="text-align: center; width: 30%">
 				<table style="margin: auto;">
 					<tr>
 						<td style="text-align: center">
 							<div id="generate" class="control">
 								<span class="glyphicon glyphicon-refresh"></span>
-							</div>
-						</td>
-
-						<td style="text-align: center">
-							<div id="mutate" class="control">
-								<span class="glyphicon glyphicon-random"></span>
 							</div>
 						</td>
 
@@ -443,12 +439,6 @@
 
 						<td style="text-align: center">
 							<div class="button-label">
-								Mutate
-							</div>
-						</td>
-
-						<td style="text-align: center">
-							<div class="button-label">
 								Learn
 							</div>
 						</td>
@@ -456,9 +446,9 @@
 				</table>
 			</td>
 
-			<td style="text-align: center; width: 26%">
+			<td style="text-align: center; width: 20%">
 				<div>
-					<table style="margin: auto;">
+					<table style="float: right;">
 						<tr>
 							<td style="text-align: center">
 								<div id="lower-bank" class="control">
@@ -492,6 +482,272 @@
 		</tr>
 	</table>
 
+	<div id="memory" style="padding-top: 40px;"></div>
+
+</div>
+
+<div id="model-pattern" class="memory-sequence">
+	<table class="sequencer" style="transform: scale(0.5,0.5) translateX(-50%); width: 220px; margin-top: -15px;">
+
+		<span class="sequence-name" style="font-family: 'DigitalCounter7'; font-weight: bold; font-size: 25px; text-shadow:0 0 10px #CC0000; color: #CC0000;">Sequence 1</span>
+
+		<!-- Hihat -->
+		<tr>
+
+			<!-- Steps -->
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+		</tr>
+
+		<!-- Snare -->
+		<tr>
+			<!-- Steps -->
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+		</tr>
+
+		<!-- Kick -->
+		<tr>
+			<!-- Steps -->
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button even"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+			<td>
+				<div class="drum-button-wrapper memory-drum">
+					<div class="drum-button odd"></div>
+				</div>
+			</td>
+		</tr>
+
+	</table>
 </div>
 
 <script src="https://code.createjs.com/soundjs-0.6.1.min.js"></script>

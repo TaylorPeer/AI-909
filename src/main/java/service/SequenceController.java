@@ -76,6 +76,17 @@ public class SequenceController {
 	}
 
 	/**
+	 * REST endpoint for retrieving a list of sequences stored in a given memory bank location.
+	 * 
+	 * @param memoryBank
+	 * @return
+	 */
+	@RequestMapping("/getSequencesForMemoryBank")
+	public List<Sequence> getSequencesForMemoryBank(@RequestParam(value = "memoryBank") int memoryBank) {
+		return loadTrainingData(memoryBank);
+	}
+
+	/**
 	 * REST endpoint for adding a new sequence to a memory bank.
 	 * 
 	 * @param sequenceString
