@@ -256,7 +256,7 @@ public class SequenceController {
 			sequenceString = generator.generate(trainingSubset, firstHit);
 
 			// Validate sequence
-			isSequenceValid = isSequenceValid(sequenceString);
+			isSequenceValid = isSequenceValid(sequenceString, trainingSequences);
 		}
 
 		return sequenceString;
@@ -275,13 +275,14 @@ public class SequenceController {
 	 * Checks if a given sequence string is a valid drum beat.
 	 * 
 	 * @param sequenceString
+	 * @param trainingSequences
 	 * @return
 	 */
-	private boolean isSequenceValid(String sequenceString) {
+	private boolean isSequenceValid(String sequenceString, List<Sequence> trainingSequences) {
 
 		String[] drums = { "0", "1", "2", "3", "4", "5", "6", "7" };
 
-		// TODO base sparsity on training sequences!
+		// TODO base sparsity on training sequences, not fixed values
 		// Check sparsity
 		int emptyBeats = StringUtils.countMatches(sequenceString, "0");
 		int sequenceSparsityThreshold = (sequenceString.length() / 2);
@@ -294,7 +295,7 @@ public class SequenceController {
 		List<String> digitsSeen = new ArrayList<String>();
 		for (String digit : drums) {
 			int count = StringUtils.countMatches(sequenceString, digit);
-			// Only count if drum hit occured more than once
+			// Only count if drum hit occurred more than once
 			if (count > 1) {
 				digitsSeen.add(digit);
 			}
@@ -315,6 +316,14 @@ public class SequenceController {
 			String roll = digit + digit + digit + digit + digit;
 			if (sequenceString.contains(roll)) {
 				log.error("Sequence contained too long of a drum roll: " + sequenceString);
+				return false;
+			}
+		}
+
+		// Check that sequence is not already contained in the training material
+		for (Sequence trainingSequence : trainingSequences) {
+			if (trainingSequence.getSequence().equals(sequenceString)) {
+				log.error("Sequence is already contained in knowledge base: " + sequenceString);
 				return false;
 			}
 		}
