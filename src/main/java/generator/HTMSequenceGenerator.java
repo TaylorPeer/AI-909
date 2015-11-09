@@ -1,7 +1,5 @@
 package generator;
 
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +9,7 @@ import org.numenta.nupic.ComputeCycle;
 import org.numenta.nupic.Connections;
 import org.numenta.nupic.Parameters;
 import org.numenta.nupic.Parameters.KEY;
+import org.numenta.nupic.SDR;
 import org.numenta.nupic.algorithms.CLAClassifier;
 import org.numenta.nupic.algorithms.ClassifierResult;
 import org.numenta.nupic.algorithms.SpatialPooler;
@@ -32,10 +31,6 @@ public class HTMSequenceGenerator {
 	private Connections memory = new Connections();
 
 	private int columnCount;
-
-	private int cellsPerColumn;
-
-	private int[] predictedColumns;
 
 	private ScalarEncoder encoder;
 
@@ -62,7 +57,6 @@ public class HTMSequenceGenerator {
 		temporalMemory.init(memory);
 
 		columnCount = memory.getPotentialPools().getMaxIndex() + 1;
-		cellsPerColumn = memory.getCellsPerColumn();
 	}
 
 	/**
@@ -113,11 +107,13 @@ public class HTMSequenceGenerator {
 
 				int[] input = ArrayUtils.where(output, ArrayUtils.WHERE_1);
 				ComputeCycle cc = temporalMemory.compute(memory, input, true);
-				predictedColumns = getSDR(cc.predictiveCells());
 
 				classification.put("bucketIdx", bucketIdx);
 				classification.put("actValue", value);
-				classifier.compute(recordNum, classification, predictedColumns, true, true);
+				
+				Set<Cell> activeCells = cc.activeCells;
+				int[] activeCellIndices = SDR.asCellIndices(activeCells);
+				classifier.compute(recordNum, classification, activeCellIndices, true, true);
 			}
 		}
 
@@ -137,11 +133,13 @@ public class HTMSequenceGenerator {
 
 			int[] input = ArrayUtils.where(output, ArrayUtils.WHERE_1);
 			ComputeCycle cc = temporalMemory.compute(memory, input, false);
-			predictedColumns = getSDR(cc.predictiveCells());
 
 			classification.put("bucketIdx", bucketIdx);
 			classification.put("actValue", value);
-			ClassifierResult<Double> result = classifier.compute(i, classification, predictedColumns, false, true);
+			
+			Set<Cell> activeCells = cc.activeCells;
+			int[] activeCellIndices = SDR.asCellIndices(activeCells);
+			ClassifierResult<Double> result = classifier.compute(i, classification, activeCellIndices, false, true);
 
 			value = Math.round(result.getMostProbableValue(1));
 			if (i < (sequences.get(0).length() - 1)) {
@@ -191,18 +189,5 @@ public class HTMSequenceGenerator {
 		parameters.setParameterByKey(KEY.ACTIVATION_THRESHOLD, 4);
 
 		return parameters;
-	}
-
-	private int[] getSDR(Set<Cell> cells) {
-		int[] retVal = new int[cells.size()];
-		int i = 0;
-		for (Iterator<Cell> it = cells.iterator(); i < retVal.length; i++) {
-			retVal[i] = it.next().getIndex();
-			retVal[i] /= cellsPerColumn;
-		}
-		Arrays.sort(retVal);
-		retVal = ArrayUtils.unique(retVal);
-
-		return retVal;
 	}
 }

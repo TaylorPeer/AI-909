@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>org.numenta</groupId>
 			<artifactId>htm.java</artifactId>
-			<version>0.6.4</version>
+			<version>0.6.5-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
@@ -60,7 +60,16 @@
 			<id>spring-releases</id>
 			<url>https://repo.spring.io/libs-release</url>
 		</repository>
+		<repository>
+	        <id>oss-sonatype</id>
+	        <name>oss-sonatype</name>
+	        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+	        <snapshots>
+	            <enabled>true</enabled>
+	        </snapshots>
+	    </repository>
 	</repositories>
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>spring-releases</id>
